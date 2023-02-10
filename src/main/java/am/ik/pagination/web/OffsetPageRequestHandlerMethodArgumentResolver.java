@@ -19,8 +19,8 @@ public class OffsetPageRequestHandlerMethodArgumentResolver
 		this.properties = properties;
 	}
 
-	public OffsetPageRequestHandlerMethodArgumentResolver(Consumer<OffsetPageRequestPropertiesBuilder> consumer) {
-		final OffsetPageRequestPropertiesBuilder builder = new OffsetPageRequestPropertiesBuilder();
+	public OffsetPageRequestHandlerMethodArgumentResolver(Consumer<OffsetPageRequestProperties.Builder> consumer) {
+		final OffsetPageRequestProperties.Builder builder = OffsetPageRequestProperties.builder();
 		consumer.accept(builder);
 		this.properties = builder.build();
 	}
