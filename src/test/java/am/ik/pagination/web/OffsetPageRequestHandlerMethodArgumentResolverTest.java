@@ -51,6 +51,34 @@ class OffsetPageRequestHandlerMethodArgumentResolverTest {
 	}
 
 	@Test
+	void resolveArgument_underMinSize() {
+		final OffsetPageRequestHandlerMethodArgumentResolver argumentResolver = new OffsetPageRequestHandlerMethodArgumentResolver();
+		final NativeWebRequest webRequest = (NativeWebRequest) Proxy.newProxyInstance(this.getClass().getClassLoader(), new Class[] {NativeWebRequest.class}, (proxy, method, args) -> {
+			if ("getParameter".equals(method.getName())) {
+				return Map.of("size", "0").get(args[0]);
+			}
+			return null;
+		});
+		final OffsetPageRequest pageRequest = (OffsetPageRequest) argumentResolver.resolveArgument(null, new ModelAndViewContainer(), webRequest, (r, target, objectName) -> null);
+		assertThat(pageRequest.pageNumber()).isEqualTo(0);
+		assertThat(pageRequest.pageSize()).isEqualTo(1);
+	}
+
+	@Test
+	void resolveArgument_underMinPage() {
+		final OffsetPageRequestHandlerMethodArgumentResolver argumentResolver = new OffsetPageRequestHandlerMethodArgumentResolver();
+		final NativeWebRequest webRequest = (NativeWebRequest) Proxy.newProxyInstance(this.getClass().getClassLoader(), new Class[] {NativeWebRequest.class}, (proxy, method, args) -> {
+			if ("getParameter".equals(method.getName())) {
+				return Map.of("page", "-1").get(args[0]);
+			}
+			return null;
+		});
+		final OffsetPageRequest pageRequest = (OffsetPageRequest) argumentResolver.resolveArgument(null, new ModelAndViewContainer(), webRequest, (r, target, objectName) -> null);
+		assertThat(pageRequest.pageNumber()).isEqualTo(0);
+		assertThat(pageRequest.pageSize()).isEqualTo(20);
+	}
+
+	@Test
 	void resolveArgument_customDefaultSize() {
 		final OffsetPageRequestHandlerMethodArgumentResolver argumentResolver = new OffsetPageRequestHandlerMethodArgumentResolver(b -> b.withPageDefault(1).withSizeDefault(10));
 		final NativeWebRequest webRequest = (NativeWebRequest) Proxy.newProxyInstance(this.getClass().getClassLoader(), new Class[] {NativeWebRequest.class}, (proxy, method, args) -> null);

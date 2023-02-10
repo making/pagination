@@ -50,6 +50,6 @@ public class OffsetPageRequestHandlerMethodArgumentResolver
 		if (sizeParameter != null) {
 			size = Integer.parseInt(sizeParameter);
 		}
-		return new OffsetPageRequest(page, Math.min(size, this.properties.sizeMax()));
+		return new OffsetPageRequest(Math.max(0, page), Math.max(1, Math.min(size, this.properties.sizeMax())));
 	}
 }
