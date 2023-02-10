@@ -6,7 +6,7 @@
 
 	<groupId>am.ik.pagination</groupId>
 	<artifactId>pagination</artifactId>
-	<version>0.1.1</version>
+	<version>0.1.2-SNAPSHOT</version>
 	<name>pagination</name>
 	<description>Pagination Java API</description>
 
