@@ -3,8 +3,8 @@ package am.ik.pagination;
 import java.util.List;
 import java.util.function.Function;
 
-public record CursorPage<T, C>(List<T> content, int size, Function<T, C> toCursor,
-							   boolean hasPrevious, boolean hasNext) {
+public record CursorPage<T, C> (List<T> content, int size, Function<T, C> toCursor, boolean hasPrevious,
+		boolean hasNext) {
 
 	public C tail() {
 		if (this.content.isEmpty()) {

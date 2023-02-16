@@ -11,8 +11,8 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-public class OffsetPageRequestHandlerMethodArgumentResolver
-		implements HandlerMethodArgumentResolver {
+public class OffsetPageRequestHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
+
 	private final OffsetPageRequestProperties properties;
 
 	public OffsetPageRequestHandlerMethodArgumentResolver(OffsetPageRequestProperties properties) {
@@ -37,9 +37,8 @@ public class OffsetPageRequestHandlerMethodArgumentResolver
 
 	@Override
 	@NonNull
-	public Object resolveArgument(MethodParameter parameter,
-			ModelAndViewContainer mavContainer, NativeWebRequest webRequest,
-			WebDataBinderFactory binderFactory) {
+	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
+			NativeWebRequest webRequest, WebDataBinderFactory binderFactory) {
 		int page = this.properties.pageDefault();
 		int size = this.properties.sizeDefault();
 		final String pageParameter = webRequest.getParameter(this.properties.pageParameterName());
@@ -52,4 +51,5 @@ public class OffsetPageRequestHandlerMethodArgumentResolver
 		}
 		return new OffsetPageRequest(Math.max(0, page), Math.max(1, Math.min(size, this.properties.sizeMax())));
 	}
+
 }

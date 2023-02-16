@@ -1,13 +1,14 @@
 package am.ik.pagination.web;
 
 public record OffsetPageRequestProperties(String pageParameterName, String sizeParameterName, int pageDefault,
-										  int sizeDefault, int sizeMax) {
+		int sizeDefault, int sizeMax) {
 
 	public static Builder builder() {
 		return new Builder();
 	}
 
 	public static class Builder {
+
 		private String pageParameterName = "page";
 
 		private String sizeParameterName = "size";
@@ -44,7 +45,9 @@ public record OffsetPageRequestProperties(String pageParameterName, String sizeP
 		}
 
 		public OffsetPageRequestProperties build() {
-			return new OffsetPageRequestProperties(pageParameterName, sizeParameterName, pageDefault, sizeDefault, sizeMax);
+			return new OffsetPageRequestProperties(pageParameterName, sizeParameterName, pageDefault, sizeDefault,
+					sizeMax);
 		}
+
 	}
 }
