@@ -2,7 +2,7 @@ package am.ik.pagination;
 
 import java.util.Optional;
 
-public record CursorPageRequest<C> (C cursor, int pageSize, Navigation navigation) {
+public record CursorPageRequest<C>(C cursor, int pageSize, Navigation navigation) {
 
 	public Optional<C> cursorOptional() {
 		return Optional.ofNullable(this.cursor);

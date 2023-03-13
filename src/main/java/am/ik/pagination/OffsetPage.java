@@ -2,7 +2,7 @@ package am.ik.pagination;
 
 import java.util.List;
 
-public record OffsetPage<T> (List<T> content, int size, int number, long totalElements) {
+public record OffsetPage<T>(List<T> content, int size, int number, long totalElements) {
 
 	public long totalPages() {
 		return this.size == 0 ? 1 : (int) Math.ceil((double) this.totalElements / (double) this.size);
